@@ -3,6 +3,28 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Formulario',
+  data(){
+    return {
+      temporizador: 0,
+      intervaloId: 0,
+    }
+  },
+  computed:{
+    tempoFormatado(): string {
+      return new Date(this.temporizador * 1000).toISOString().substr(11,8);
+    }
+  },
+  methods:{
+    iniciarTarefa(){
+      this.intervaloId = setInterval(() => {
+        this.temporizador++
+      }, 1000);
+    },
+    pararTarefa(){
+      clearInterval(this.intervaloId);
+
+    }
+  }
 });
 </script>
 
@@ -14,14 +36,14 @@ export default defineComponent({
       </div>
       <div class="column">
         <div class="is-flex is-align-items-center is-justify-content-space-between">
-          <strong>00:00:00</strong>
-          <button class="button">
+          <strong>{{ tempoFormatado }}</strong>
+          <button class="button" @click="iniciarTarefa">
             <span class="icon">
                 <i class="fas fa-play"></i>
             </span>
             <span>play</span>
           </button>
-          <button class="button">
+          <button class="button" @click="pararTarefa">
             <span class="icon">
                 <i class="fas fa-stop"></i>
             </span>
