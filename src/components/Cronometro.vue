@@ -18,9 +18,11 @@
 </script>
 
 <template>
-  <strong>{{ tempoFormatado }}</strong>
+  <strong class="display">{{ tempoFormatado }}</strong>
 </template>
 
 <style scoped>
-
+.display{
+  color: var(--texto-primario);
+}
 </style>
